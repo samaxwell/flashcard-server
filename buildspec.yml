@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+  build:
+    commands:
+      - echo Build started on `date`
+      - ./gradlew test
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - ./gradlew build
+artifacts:
+  files:
+    - build/libs/*-*-SNAPSHOT.jar
+#    - appspec.yml
+  discard-paths: yes
+
+reports: #New
+  TestReports: # CodeBuild will create a report group called "TestReports".
+    files: #Store all of the files
+      - '**/*'
+    base-directory: 'build/test-results' # Location of the reports
+
+cache:
+  paths:
+    - '/root/.gradle/**/*'
