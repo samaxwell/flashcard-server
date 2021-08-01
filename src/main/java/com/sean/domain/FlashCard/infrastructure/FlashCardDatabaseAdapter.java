@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class FlashCardDatabaseAdapter implements FlashCardDatabase {
@@ -21,6 +23,16 @@ public class FlashCardDatabaseAdapter implements FlashCardDatabase {
             return new FlashCardIdentifier((savedFlashCard.getIdentifierAsLong()));
         } catch (DataAccessException e) {
             throw new SaveNewFlashCardException(e);
+        }
+    }
+
+    @Override
+    public List<FlashCard> getAllFlashCards() {
+        try {
+            return flashCardRepository.findAll();
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException("Something bad happened: " + e.getMessage());
         }
     }
 
