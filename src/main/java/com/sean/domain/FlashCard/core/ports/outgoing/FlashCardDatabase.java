@@ -10,4 +10,8 @@ public interface FlashCardDatabase {
     FlashCardIdentifier save(FlashCard flashCard);
 
     List<FlashCard> getAllFlashCards();
+
+    FlashCard getFlashCardById(Long id);
+
+    void deleteFlashCardById(Long id);
 }

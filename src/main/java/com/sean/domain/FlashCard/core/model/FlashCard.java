@@ -1,5 +1,6 @@
 package com.sean.domain.FlashCard.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public class FlashCard {
         this.backText = addFlashCardCommand.getBackText();
     }
 
+    @JsonIgnore
     public Long getIdentifierAsLong() {
         return this.id;
     }
